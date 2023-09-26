@@ -19,7 +19,9 @@ def main():
             if event.type == pg.QUIT: return
 
         screen.blit(bg_img, [0, 0])
-        screen.blit(flipped_kokaton_img, [300,200])
+
+        flap = tmr % 2
+        screen.blit(kokatons_list[flap], [300, 200])
         pg.display.update()
         tmr += 1        
         clock.tick(10)
