@@ -11,7 +11,7 @@ def main():
     kokaton_img = pg.image.load("ex01/fig/3.png")
     flipped_kokaton_img = pg.transform.flip(kokaton_img, True, False)
     # rotated_kokaton_img = pg.transform.rotozoom(flipped_kokaton_img, 10, 1.0)
-    angle = 10
+    angle = 11 # 指定したい角度 + 1°
     kokatons_list = list(pg.transform.rotozoom(flipped_kokaton_img, i, 1.0) \
                          for i in range(angle))
 
@@ -30,19 +30,18 @@ def main():
             screen.blit(bg_img, [bg_x + 1600, 0])
 
         if ret:
-            flap = -1 * (tmr % 10 + 1)
+            flap = -1 * (tmr % angle + 1)
         else:
-            flap = (tmr % 10)
+            flap = (tmr % angle)
 
         screen.blit(kokatons_list[flap], [300, 200])
 
-        if flap == 9:
+        if flap == angle - 1:
             ret = True
-        elif flap == -10:
+        elif flap == -angle:
             ret = False
 
         pg.display.update()
-        print(flap)
         tmr += 1        
         bg_x -= 1
         clock.tick(100)
