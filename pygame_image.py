@@ -14,17 +14,24 @@ def main():
     kokatons_list = [flipped_kokaton_img, rotated_kokaton_img]
 
     tmr = 0
+    bg_x = 0
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
 
-        screen.blit(bg_img, [0, 0])
+        if bg_x <= -1600:
+            bg_x = 0
+
+        screen.blit(bg_img, [bg_x, 0])
+        if bg_x <= -800:
+            screen.blit(bg_img, [bg_x + 1600, 0])
 
         flap = tmr % 2
         screen.blit(kokatons_list[flap], [300, 200])
         pg.display.update()
         tmr += 1        
-        clock.tick(10)
+        bg_x -= 1
+        clock.tick(100)
 
 
 if __name__ == "__main__":
