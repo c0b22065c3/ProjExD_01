@@ -16,7 +16,7 @@ def main():
     kokaton_img = pg.image.load("ex01/fig/3.png")
     flipped_kokaton_img = pg.transform.flip(kokaton_img, True, False)
     
-    angle = 360
+    angle = 10
     angle_len = angle + 1
     kokatons_list = list(pg.transform.rotozoom(flipped_kokaton_img, i, 1.0) \
                          for i in range(angle_len))
