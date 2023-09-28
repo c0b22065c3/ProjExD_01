@@ -4,7 +4,10 @@ import pygame as pg
 
 def main():
     pg.display.set_caption("はばたけ！こうかとん")
-    screen = pg.display.set_mode((800, 600))
+
+    width = 800
+    height = 600
+    screen = pg.display.set_mode((width, height))
     clock  = pg.time.Clock()
 
     bg_img = pg.image.load("ex01/fig/pg_bg.jpg")
@@ -12,23 +15,25 @@ def main():
 
     kokaton_img = pg.image.load("ex01/fig/3.png")
     flipped_kokaton_img = pg.transform.flip(kokaton_img, True, False)
-    # rotated_kokaton_img = pg.transform.rotozoom(flipped_kokaton_img, 10, 1.0)
+    
     angle = 11 # 指定したい角度 + 1°
     kokatons_list = list(pg.transform.rotozoom(flipped_kokaton_img, i, 1.0) \
                          for i in range(angle))
 
+    bg_width = 1600
+
     tmr = 0
     bg_x = 0
-    bg_x_2 = 1600
+    bg_x_2 = bg_width
     ret = False
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
 
-        if bg_x <= -1600:
-            bg_x = 1600
-        if bg_x_2 <= -1600:
-            bg_x_2 = 1600
+        if bg_x <= -bg_width:
+            bg_x = bg_width
+        if bg_x_2 <= -bg_width:
+            bg_x_2 = bg_width
 
         screen.blit(bg_img, [bg_x, 0])
         screen.blit(rotated_bg_img, [bg_x_2, 0])
